@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stylish Hotel Booking</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right top, #a1c4fd, #c2e9fb);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 35px;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      color: #003e6b;
+    }
+
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #002d5c;
+    }
+
+    label {
+      font-weight: 500;
+      margin-top: 20px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+      transition: 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      background: #e0f7fa;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background: linear-gradient(to right, #00bcd4, #2196f3);
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #0288d1, #1565c0);
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h1>Hotel Booking Form</h1>
+  <form id="bookingForm">
+    <label for="name">Customer Name*</label>
+    <input type="text" id="name" required>
+
+    <label for="checkin">Check-in Date*</label>
+    <input type="date" id="checkin" required>
+
+    <label for="days">Total Days*</label>
+    <input type="number" id="days" min="1" required>
+
+    <label for="persons">Total Persons</label>
+    <input type="number" id="persons" min="1">
+
+    <label for="advance">Advance Amount</label>
+    <input type="number" id="advance" min="0">
+
+    <label for="roomType">Room Type</label>
+    <select id="roomType">
+      <option value="2000">Deluxe (₹2000/day)</option>
+      <option value="4000">Suite (₹4000/day)</option>
+    </select>
+
+    <label for="amenities">Amenities</label>
+    <select id="amenities">
+      <option value="0">None</option>
+      <option value="1000">AC (₹1000/day)</option>
+      <option value="300">Locker (₹300/day)</option>
+      <option value="1300">AC + Locker (₹1300/day)</option>
+    </select>
+
+    <label>Rates:</label>
+    <ul>
+      <li>Deluxe Room: ₹2000/day</li>
+      <li>Suite Room: ₹4000/day</li>
+      <li>AC: ₹1000/day</li>
+      <li>Locker: ₹300/day</li>
+    </ul>
+
+    <label for="total">Total Cost</label>
+    <input type="text" id="total" disabled>
+
+    <label for="balance">Balance Amount</label>
+    <input type="text" id="balance" disabled>
+
+    <button type="button" onclick="calculate()">Calculate Total</button>
+  </form>
+</div>
+
+<script>
+  function calculate() {
+    const days = parseInt(document.getElementById("days").value) || 0;
+    const roomRate = parseInt(document.getElementById("roomType").value);
+    const amenityRate = parseInt(document.getElementById("amenities").value);
+    const advance = parseInt(document.getElementById("advance").value) || 0;
+
+    const totalCost = (roomRate + amenityRate) * days;
+    const balance = totalCost - advance;
+
+    document.getElementById("total").value = "₹" + totalCost;
+    document.getElementById("balance").value = "₹" + balance;
+  }
+</script>
+
+</body>
+</html>
